@@ -1,0 +1,32 @@
+<h1>Edit Review for <%= @restaurant.name %></h1>
+
+<%= form_for([@restaurant, @review]) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= pluralize(@review.errors.count, "error") %> prohibited
+        this review from being saved:
+      </h3>
+      <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update Review" %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Back', restaurant_path(@restaurant) %>
+<%= link_to 'Delete', restaurant_path(@restaurant),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
