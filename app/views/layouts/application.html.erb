@@ -9,10 +9,20 @@
   </head>
 
   <body>
-    <% if flash[:notice] || flash[:alert] %>
-      <p class="notice"><%= flash[:notice] %></p>
-      <p class="alert"><%= flash[:alert] %></p>
-    <% end %>
+    <nav>
+      <ul>
+        <% if user_signed_in? %>
+          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+        <% else  %>
+          <li><%= link_to 'Log In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
 
     <%= yield %>
   </body>
